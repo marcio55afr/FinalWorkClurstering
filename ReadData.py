@@ -15,8 +15,8 @@ def getDatasets():
     list_df = []
     list_df.append( pd.read_csv('Data/OlivierFeatures.csv') )
     list_df.append( pd.read_csv('Data/BooneFeatures.csv') )
-    #list_df.append( pd.read_csv('Data/___.csv') )
-    #list_df.append( pd.read_csv('Data/___.csv') )
+    list_df.append( pd.read_csv('Data/Linfoma.csv') )
+    list_df.append( pd.read_csv('Data/Displasia.csv') )
 
     return list_df
 

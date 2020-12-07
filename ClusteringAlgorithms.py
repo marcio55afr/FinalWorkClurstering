@@ -14,10 +14,10 @@ class kMeansModel():
     
     # Creates an object with and save all the information that it needs
     # to fit a model of clurstering K-Means
-    def __init__(self, data, target_index):
+    def __init__(self, data):
         self.model = None
-        self.target = data.iloc[:, target_index]
-        self.data = data.drop(axis=1, index = target_index)
+        self.target = data['target']
+        self.data = data.drop(columns = 'target')
     
     ### Primary Functions ###
 
