@@ -29,11 +29,13 @@ class kMeansModel():
         
         self.model = model
     
-    def printInfo(self):
+    def printInfo(self, name):
         
+        print('\n\n Dataset: ',name)
         #print('Final locations of the centroid:\n',self.model.cluster_centers_)
         print('number of iterations:  ',self.model.n_iter_, '\n')
-        print('lowest SSE value:  ',self.model.inertia_, '\n')
+        print('SSE value:  ',self.model.inertia_, '\n')
         print('labels:  ',self.model.labels_, '\n')
-        num_labels = np.unique(self.model.labels_, return_counts=True)
-        print(num_labels)
+        labels, amount = np.unique(self.model.labels_, return_counts=True)
+        print('Unique labels:\n',labels)
+        print('Amount of each on:\n',amount)

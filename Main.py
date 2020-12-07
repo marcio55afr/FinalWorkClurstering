@@ -10,19 +10,12 @@ from ClusteringAlgorithms import kMeansModel
 
 list_df = ReadData.getDatasets()
 
-kmeans1 = kMeansModel(list_df[0])
-kmeans1.stardartProcess(14)
-kmeans1.printInfo()
+kmeans_objects = []
 
-kmeans2 = kMeansModel(list_df[1])
-kmeans2.stardartProcess(14)
-kmeans2.printInfo()
-
-kmeans3 = kMeansModel(list_df[2])
-kmeans3.stardartProcess(3)
-kmeans3.printInfo()
-
-kmeans4 = kMeansModel(list_df[3])
-kmeans4.stardartProcess(3)
-kmeans4.printInfo()
+for df, param in list_df:
+    kmeans = kMeansModel(df)
+    kmeans.stardartProcess(param.k_clusters)
+    kmeans.printInfo(param.name)
+    
+    kmeans_objects.append(kmeans)
 

@@ -7,16 +7,14 @@ Created on Sun Dec  6 21:09:03 2020
 
 import pandas as pd
 import numpy as np
+import Config
 from sklearn.impute import SimpleImputer
-
 
 def getDatasets():
     
     list_df = []
-    list_df.append( pd.read_csv('Data/OlivierFeatures.csv') )
-    list_df.append( pd.read_csv('Data/BooneFeatures.csv') )
-    list_df.append( pd.read_csv('Data/Linfoma.csv') )
-    list_df.append( pd.read_csv('Data/Displasia.csv') )
+    for config_dataset in Config.datasets:
+        list_df.append( (pd.read_csv(config_dataset.path), config_dataset) )
 
     return list_df
 
