@@ -6,8 +6,9 @@ Created on Sun Dec  6 21:07:42 2020
 """
 
 import Config
-
+import ClusterLabelScore as ls
 from sklearn.cluster import KMeans
+from sklearn import metrics
 import numpy as np
 
 class kMeansModel():
@@ -39,3 +40,11 @@ class kMeansModel():
         labels, amount = np.unique(self.model.labels_, return_counts=True)
         print('Unique labels:\n',labels)
         print('Amount of each on:\n',amount)
+        print('purity: ',ls.purity(self.model.labels_, self.target))
+        print('entropy: ', ls.entropy(self.model.labels_,self.target))
+        #rand index - [-1,1], quanto maior melhor
+        print('rand index: ', metrics.cluster.adjusted_rand_score(self.target,self.model.labels_))
+        #silhueta - [-1,1], quanto maior, melhor
+        print('silhueta: ',metrics.silhouette_score(self.data,self.model.labels_))
+        #davies bouldin - [>0], quanto menor, melhor
+        print('davies-bouldin: ',metrics.davies_bouldin_score(self.data,self.model.labels_))
