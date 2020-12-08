@@ -21,12 +21,12 @@ for df, param in list_df:
     kmeans.printInfo()
     kmeans_objects.append(kmeans)
     
-    meanShift = MeanShiftModel(df)
-    meanShift.fit()
-    meanShift.printInfo()
-    meanShift_objects.append(meanShift)
+    # meanShift = MeanShiftModel(df)
+    # meanShift.fit()
+    # meanShift.printInfo()
+    # meanShift_objects.append(meanShift)
     
     # dbscan = DBSCANModel(df)
-    # dbscan.fit()
+    # dbscan.fit(param.eps)
     # dbscan.printInfo()
     # dbscan_objects.append(dbscan)

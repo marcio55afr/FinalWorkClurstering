@@ -32,7 +32,7 @@ class Model():
         print('Amount of each on:\n',amount,end='\n\n')
         
     def preProcessing_(self):
-        self.data = (self.data - self.data.mean())/self.data.std()
+        self.data = (self.data - self.data.mean())/self.data.std() 
         
 
 class KMeansModel(Model):
@@ -85,12 +85,13 @@ class DBSCANModel(Model):
         super().__init__(data)
     
     # Runs the cluresting using the Mean shift algorithm 
-    def fit(self):
+    def fit(self, eps):
         
-        model = DBSCAN(eps=0.4).fit(self.data) 
+        model = DBSCAN(eps = eps, min_samples=10).fit(self.data) 
         self.model = model
 
     def printInfo(self):
+        print(self.model.labels_)
         print('\nInfomation about DBSCAN model\n')
         super().printInfo()
         

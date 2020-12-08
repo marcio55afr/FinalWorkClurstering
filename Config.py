@@ -11,17 +11,20 @@ def seed():
 
 class Parameters:
     
-    def __init__(self, name, path, k_clusters):
+    def __init__(self, name, path, k_clusters, eps):
         
         self.name = name
         self.path = path # Path of the dataset to be read or written
         self.k_clusters = k_clusters # Number of clusters
+        self.eps = eps
         
 datasets = [
-    Parameters('Linfoma','Data/Linfoma.csv', 3),
-    Parameters('Displasia','Data/Displasia.csv', 4),
-    Parameters('Olivier','Data/OlivierFeatures.csv', 14),
-    Parameters('Boone','Data/BooneFeatures.csv', 14)
+    Parameters('Linfoma','Data/Linfoma.csv', 3, 6),
+    Parameters('Displasia','Data/Displasia.csv', 4, 0.4),
+    Parameters('Olivier','Data/OlivierFeatures.csv', 14, 0.4),
+    Parameters('Boone','Data/BooneFeatures.csv', 14, 0.4),
+    Parameters('Wine','Data/Wine.csv',3,0.4),
+    Parameters('')
 ]
 
     
