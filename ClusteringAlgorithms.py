@@ -7,7 +7,7 @@ Created on Sun Dec  6 21:07:42 2020
 
 import Config
 import ClusterLabelScore as ls
-from sklearn.cluster import KMeans, MeanShift
+from sklearn.cluster import KMeans, MeanShift, OPTICS
 import numpy as np
 
 class Model():
@@ -25,7 +25,6 @@ class Model():
         #print('labels:  ',self.model.labels_, '\n')
         labels, amount = np.unique(self.model.labels_, return_counts=True)
         ls.printInfo(self.model.labels_, self.target, self.data)
-        print('number of iterations:  ',self.model.n_iter_)
         print('Unique labels:\n',labels)
         print('Amount of each on:\n',amount,end='\n\n')
         
@@ -49,11 +48,10 @@ class KMeansModel(Model):
     def printInfo(self):
         print('\nInfomation about K-Means model\n')
         print('SSE value:  ',self.model.inertia_)
+        print('number of iterations:  ',self.model.n_iter_)
         super().printInfo()        
         
-        
-        
-        
+  
 
 class MeanShiftModel(Model):
     
@@ -69,7 +67,41 @@ class MeanShiftModel(Model):
 
     def printInfo(self):
         print('\nInfomation about Mean Shift model\n')
+        print('number of iterations:  ',self.model.n_iter_)
         super().printInfo()
+        
+
+
+class OpticsModel(Model):
+    
+    # Creates an object with data and its super Inherence 
+    def __init__(self, data):
+        super().__init__(data)
+        self.method = 'xi' # default method of the OPTICS object
+    
+    # Runs the cluresting using the OPTICS algorithm 
+    def fit(self):
+        
+        model = OPTICS().fit(self.data) 
+        self.model = model
+        
+    def fit_dbscan(self):
+        
+        model = OPTICS(cluster_method='dbscan',max_eps=1).fit(self.data)
+        self.method = 'dbscan'
+        self.model = model
+
+    def printInfo(self):
+        print('\nInfomation about Optics model using the method ' + self.method, end='\n\n')
+        super().printInfo()
+               
+        
+        
+        
+        
+        
+        
+        
         
         
         
