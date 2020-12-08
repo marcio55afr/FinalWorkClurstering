@@ -9,6 +9,7 @@ import Config
 import ClusterLabelScore as ls
 from sklearn.cluster import KMeans, MeanShift, DBSCAN
 import numpy as np
+from sklearn import preprocessing
 
 class Model():
      
@@ -17,6 +18,8 @@ class Model():
         self.model = None
         self.target = data['target']
         self.data = data.drop(columns = 'target')
+        
+        self.preProcessing_()
         
     
     def printInfo(self):
@@ -28,6 +31,8 @@ class Model():
         print('Unique labels:\n',labels)
         print('Amount of each on:\n',amount,end='\n\n')
         
+    def preProcessing_(self):
+        self.data = (self.data - self.data.mean())/self.data.std()
         
 
 class KMeansModel(Model):
@@ -66,6 +71,7 @@ class MeanShiftModel(Model):
         self.model = model
 
     def printInfo(self):
+        print(self.model.labels_)
         print('\nInfomation about Mean Shift model\n')
         print('number of iterations:  ',self.model.n_iter_)
         super().printInfo()
@@ -81,7 +87,7 @@ class DBSCANModel(Model):
     # Runs the cluresting using the Mean shift algorithm 
     def fit(self):
         
-        model = DBSCAN(eps=0.01).fit(self.data) 
+        model = DBSCAN(eps=0.4).fit(self.data) 
         self.model = model
 
     def printInfo(self):

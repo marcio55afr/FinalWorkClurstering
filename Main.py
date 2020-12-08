@@ -26,7 +26,7 @@ for df, param in list_df:
     meanShift.printInfo()
     meanShift_objects.append(meanShift)
     
-    dbscan = DBSCANModel(df)
-    dbscan.fit()
-    dbscan.printInfo()
-    dbscan_objects.append(dbscan)
+    # dbscan = DBSCANModel(df)
+    # dbscan.fit()
+    # dbscan.printInfo()
+    # dbscan_objects.append(dbscan)
