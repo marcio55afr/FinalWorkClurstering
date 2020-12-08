@@ -6,16 +6,23 @@ Created on Sun Dec  6 21:08:51 2020
 """
 
 import ReadData
-from ClusteringAlgorithms import kMeansModel
+from ClusteringAlgorithms import KMeansModel, MeanShiftModel
 
 list_df = ReadData.getDatasets()
 
 kmeans_objects = []
+meanShift_objects = []
 
 for df, param in list_df:
-    kmeans = kMeansModel(df)
-    kmeans.stardartProcess(param.k_clusters)
-    kmeans.printInfo(param.name)
+    print('\n\n\n\n\tDataset: ',param.name)
+    kmeans = KMeansModel(df)
+    kmeans.fit(param.k_clusters)
+    kmeans.printInfo()
     
     kmeans_objects.append(kmeans)
-
+    
+    meanShift = MeanShiftModel(df)
+    meanShift.fit()
+    meanShift.printInfo()
+    
+    meanShift_objects.append(meanShift)

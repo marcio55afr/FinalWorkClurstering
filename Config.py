@@ -17,10 +17,11 @@ class Parameters:
         self.path = path # Path of the dataset to be read or written
         self.k_clusters = k_clusters # Number of clusters
         
-datasets = [Parameters('Olivier','Data/OlivierFeatures.csv', 14),
-           Parameters('Boone','Data/BooneFeatures.csv', 14),
-           Parameters('Linfoma','Data/Linfoma.csv', 3),
-           Parameters('Displasia','Data/Displasia.csv', 4)
+datasets = [
+    Parameters('Linfoma','Data/Linfoma.csv', 3),
+    Parameters('Displasia','Data/Displasia.csv', 4),
+    Parameters('Olivier','Data/OlivierFeatures.csv', 14),
+    Parameters('Boone','Data/BooneFeatures.csv', 14)
 ]
 
     
