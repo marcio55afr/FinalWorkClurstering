@@ -6,14 +6,13 @@ Created on Sun Dec  6 21:08:51 2020
 """
 
 import ReadData
-from ClusteringAlgorithms import KMeansModel, MeanShiftModel, OpticsModel
+from ClusteringAlgorithms import KMeansModel, MeanShiftModel, DBSCANModel
 
 list_df = ReadData.getDatasets()
 
 kmeans_objects = []
 meanShift_objects = []
-optics_objects = []
-opticsDbscan_objects = []
+dbscan_objects = []
 
 for df, param in list_df:
     print('\n\n\n\n\tDataset: ',param.name)
@@ -27,16 +26,7 @@ for df, param in list_df:
     meanShift.printInfo()
     meanShift_objects.append(meanShift)
     
-    optics = OpticsModel(df)
-    optics.fit()
-    optics.printInfo()
-    optics_objects.append(optics)
-    
-    
-    # Didn' work, dbscan is clurstering all data as one cluster
-    # and some information cannot calculate that.
-    
-    #optics = OpticsModel(df)
-    #optics.fit_dbscan()
-    #optics.printInfo()
-    #opticsDbscan_objects.append(optics)
+    dbscan = DBSCANModel(df)
+    dbscan.fit()
+    dbscan.printInfo()
+    dbscan_objects.append(dbscan)

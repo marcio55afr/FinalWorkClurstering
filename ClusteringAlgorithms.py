@@ -7,7 +7,7 @@ Created on Sun Dec  6 21:07:42 2020
 
 import Config
 import ClusterLabelScore as ls
-from sklearn.cluster import KMeans, MeanShift, OPTICS
+from sklearn.cluster import KMeans, MeanShift, DBSCAN
 import numpy as np
 
 class Model():
@@ -70,8 +70,28 @@ class MeanShiftModel(Model):
         print('number of iterations:  ',self.model.n_iter_)
         super().printInfo()
         
+  
 
+class DBSCANModel(Model):
+    
+    # Creates an object with data and its super Inherence 
+    def __init__(self, data):
+        super().__init__(data)
+    
+    # Runs the cluresting using the Mean shift algorithm 
+    def fit(self):
+        
+        model = DBSCAN(eps=0.01).fit(self.data) 
+        self.model = model
 
+    def printInfo(self):
+        print('\nInfomation about DBSCAN model\n')
+        super().printInfo()
+        
+        
+'''
+    # Didn' work, dbscan is clurstering all data as one cluster
+    # and some information cannot calculate that.
 class OpticsModel(Model):
     
     # Creates an object with data and its super Inherence 
@@ -94,11 +114,30 @@ class OpticsModel(Model):
     def printInfo(self):
         print('\nInfomation about Optics model using the method ' + self.method, end='\n\n')
         super().printInfo()
-               
+      
+ 
+       
+# Just need three different model on this work
+
+class GaussianMixtureModel(Model):
+    
+    # Creates an object with data and its super Inherence 
+    def __init__(self, data):
+        super().__init__(data)
+        self.labels = None
         
+    # Runs the cluresting using the OPTICS algorithm 
+    def fit(self, num_labels):            
+        self.labels = GaussianMixture(n_components=num_labels, covariance_type='full').fit_predict(self.data)
+
+    def printInfo(self):
+        print('\nInfomation about Gaussian Mixture model\n')
+        labels, amount = np.unique(self.labels, return_counts=True)
+        ls.printInfo(self.labels, self.target, self.data)
+        print('Unique labels:\n',labels)
+        print('Amount of each on:\n',amount,end='\n\n')
         
-        
-        
+'''       
         
         
         
