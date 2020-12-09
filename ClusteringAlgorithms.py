@@ -9,7 +9,6 @@ import Config
 import ClusterLabelScore as ls
 from sklearn.cluster import KMeans, MeanShift, DBSCAN,SpectralClustering, AffinityPropagation
 import numpy as np
-from sklearn import preprocessing
 
 class Model():
      
@@ -19,13 +18,10 @@ class Model():
         self.target = data['target']
         self.data = data.drop(columns = 'target')
         
-        self.preProcessing_()
-        
     
     def printInfo(self):
         
         #print('Final locations of the centroid:\n',self.model.cluster_centers_)
-        #print('labels:  ',self.model.labels_, '\n')
         labels, amount = np.unique(self.model.labels_, return_counts=True)
         ls.printInfo(self.model.labels_, self.target, self.data)
         print('Unique labels:\n',labels)
@@ -49,7 +45,7 @@ class KMeansModel(Model):
         # n_clusters: the number of clusters or centroids generated
         # by Kmeans... Try use the number of target/label if exists.
         
-        model = KMeans(n_clusters, random_state=Config.seed()).fit(self.data)        
+        model = KMeans(n_clusters, random_state=Config.Seed).fit(self.data)        
         
         self.model = model
 
@@ -74,7 +70,6 @@ class MeanShiftModel(Model):
         self.model = model
 
     def printInfo(self):
-        print(self.model.labels_)
         print('\nInfomation about Mean Shift model\n')
         print('number of iterations:  ',self.model.n_iter_)
         super().printInfo()
@@ -94,7 +89,6 @@ class DBSCANModel(Model):
         self.model = model
 
     def printInfo(self):
-        print(self.model.labels_)
         print('\nInfomation about DBSCAN model\n')
         super().printInfo()
         
@@ -109,7 +103,7 @@ class SpectralClusteringModel(Model):
         
         model = SpectralClustering(n_clusters=k_clusters,
                                    assign_labels="discretize",
-                                   random_state=0).fit(self.data)
+                                   random_state=Config.Seed).fit(self.data)
         self.model = model
 
     def printInfo(self):
@@ -126,7 +120,8 @@ class AffinityPropagationModel(Model):
     # Runs the cluresting using the Mean shift algorithm 
     def fit(self, damping = 0.5):
         
-        model = AffinityPropagation(damping).fit(self.data)
+        model = AffinityPropagation(damping = damping,
+                                    random_state=Config.Seed).fit(self.data)
         self.model = model
 
     def printInfo(self):

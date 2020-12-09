@@ -9,6 +9,7 @@ import ReadData
 import numpy as np
 import pandas as pd
 from ClusteringAlgorithms import KMeansModel, MeanShiftModel, DBSCANModel,SpectralClusteringModel, AffinityPropagationModel
+from sklearn import preprocessing
 
 list_df = ReadData.getDatasets()
 

@@ -6,8 +6,7 @@ Created on Sun Dec  6 21:08:38 2020
 """
 
 # Seed to be used on every random execution
-def seed():
-    return 8348
+Seed = 8348
 
 class Parameters:
     
@@ -23,7 +22,7 @@ datasets = [
     Parameters('Linfoma','Data/Linfoma.csv', 3, 6, 0.5),
     Parameters('Displasia','Data/Displasia.csv', 4, 6, 0.5),
     Parameters('Olivier','Data/OlivierFeatures.csv', 14, 0.4, 0.5),
-    Parameters('Boone','Data/BooneFeatures.csv', 14, 0.4, 0.5),
+    #Parameters('Boone','Data/BooneFeatures.csv', 14, 0.4, 0.5),
     Parameters('Wine','Data/Wine.csv',3,0.4, 0.5),
     Parameters('BreastCancer','Data/BreastCancerWisconsin.csv',2,0.4, 0.5)
 ]
