@@ -9,7 +9,6 @@ import Config
 import ClusterLabelScore as ls
 from sklearn.cluster import KMeans, MeanShift, DBSCAN,SpectralClustering, AffinityPropagation
 import numpy as np
-from sklearn import preprocessing
 
 class Model():
      
@@ -19,20 +18,15 @@ class Model():
         self.target = data['target']
         self.data = data.drop(columns = 'target')
         
-        self.preProcessing_()
-        
     
     def printInfo(self):
         
         #print('Final locations of the centroid:\n',self.model.cluster_centers_)
-        #print('labels:  ',self.model.labels_, '\n')
         labels, amount = np.unique(self.model.labels_, return_counts=True)
         ls.printInfo(self.model.labels_, self.target, self.data)
         print('Unique labels:\n',labels)
         print('Amount of each on:\n',amount,end='\n\n')
-        
-    def preProcessing_(self):
-        self.data = (self.data - self.data.mean())/self.data.std() 
+        print('labels:  ',self.model.labels_, '\n')
         
 
 class KMeansModel(Model):
@@ -71,7 +65,6 @@ class MeanShiftModel(Model):
         self.model = model
 
     def printInfo(self):
-        print(self.model.labels_)
         print('\nInfomation about Mean Shift model\n')
         print('number of iterations:  ',self.model.n_iter_)
         super().printInfo()
@@ -91,7 +84,6 @@ class DBSCANModel(Model):
         self.model = model
 
     def printInfo(self):
-        print(self.model.labels_)
         print('\nInfomation about DBSCAN model\n')
         super().printInfo()
         

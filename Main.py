@@ -6,7 +6,8 @@ Created on Sun Dec  6 21:08:51 2020
 """
 
 import ReadData
-from ClusteringAlgorithms import KMeansModel, MeanShiftModel, DBSCANModel,SpectralClusteringModel, AffinityPropagationModel
+from ClusteringAlgorithms import KMeansModel, MeanShiftModel, AffinityPropagationModel
+from sklearn import preprocessing
 
 list_df = ReadData.getDatasets()
 
@@ -20,14 +21,6 @@ for df, param in list_df:
     meanShift = MeanShiftModel(df)
     meanShift.fit()
     meanShift.printInfo()
-    
-    # dbscan = DBSCANModel(df)
-    # dbscan.fit(param.eps)
-    # dbscan.printInfo()
-    
-    # spectral_clustering = SpectralClusteringModel(df)
-    # spectral_clustering.fit(param.k_clusters)
-    # spectral_clustering.printInfo()
     
     affinity_propagation = AffinityPropagationModel(df)
     affinity_propagation.fit(param.damping)
