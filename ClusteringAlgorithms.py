@@ -7,7 +7,7 @@ Created on Sun Dec  6 21:07:42 2020
 
 import Config
 import ClusterLabelScore as ls
-from sklearn.cluster import KMeans, MeanShift, DBSCAN
+from sklearn.cluster import KMeans, MeanShift, DBSCAN,SpectralClustering, AffinityPropagation
 import numpy as np
 from sklearn import preprocessing
 
@@ -87,7 +87,7 @@ class DBSCANModel(Model):
     # Runs the cluresting using the Mean shift algorithm 
     def fit(self, eps):
         
-        model = DBSCAN(eps = eps, min_samples=10).fit(self.data) 
+        model = DBSCAN(eps = eps, min_samples=5).fit(self.data) 
         self.model = model
 
     def printInfo(self):
@@ -95,7 +95,42 @@ class DBSCANModel(Model):
         print('\nInfomation about DBSCAN model\n')
         super().printInfo()
         
+class SpectralClusteringModel(Model):
+    
+    # Creates an object with data and its super Inherence 
+    def __init__(self, data):
+        super().__init__(data)
+    
+    # Runs the cluresting using the Mean shift algorithm 
+    def fit(self,k_clusters):
         
+        model = SpectralClustering(n_clusters=k_clusters,
+                                   assign_labels="discretize",
+                                   random_state=0).fit(self.data)
+        self.model = model
+
+    def printInfo(self):
+        print(self.model.labels_)
+        print('\nInfomation about SpectralClustering model\n')
+        super().printInfo()
+
+class AffinityPropagationModel(Model):
+    
+    # Creates an object with data and its super Inherence 
+    def __init__(self, data):
+        super().__init__(data)
+    
+    # Runs the cluresting using the Mean shift algorithm 
+    def fit(self, damping = 0.5):
+        
+        model = AffinityPropagation(damping).fit(self.data)
+        self.model = model
+
+    def printInfo(self):
+        print(self.model.labels_)
+        print('\nInfomation about Affinity Propagation model\n')
+        super().printInfo()
+
 '''
     # Didn' work, dbscan is clurstering all data as one cluster
     # and some information cannot calculate that.

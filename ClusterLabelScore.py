@@ -40,15 +40,17 @@ def entropy(labels, target):
 
 
 def printInfo(labels, target, data):
-    
-    print('purity: ',purity(labels, target))
-    print('entropy: ', entropy(labels, target))
-    #rand index - [-1,1], quanto maior melhor
-    print('rand index: ', metrics.cluster.adjusted_rand_score(target, labels))
-    #silhueta - [-1,1], quanto maior, melhor
-    print('silhueta: ',metrics.silhouette_score(data, labels))
-    #davies bouldin - [>0], quanto menor, melhor
-    print('davies-bouldin: ',metrics.davies_bouldin_score(data, labels))
+    if (len(np.unique(labels)) <= 1):
+        print("apenas 1 grupo encontrado. Não é possível avaliar o agrupamento")
+    else:
+        print('purity: ',purity(labels, target))
+        print('entropy: ', entropy(labels, target))
+        #rand index - [-1,1], quanto maior melhor
+        print('rand index: ', metrics.cluster.adjusted_rand_score(target, labels))
+        #silhueta - [-1,1], quanto maior, melhor
+        print('silhueta: ',metrics.silhouette_score(data, labels))
+        #davies bouldin - [>0], quanto menor, melhor
+        print('davies-bouldin: ',metrics.davies_bouldin_score(data, labels))
     
     
     
