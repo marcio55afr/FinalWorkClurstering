@@ -21,7 +21,7 @@ class Parameters:
         
 datasets = [
     Parameters('Linfoma','Data/Linfoma.csv', 3, 6, 0.5),
-    Parameters('Displasia','Data/Displasia.csv', 4, 0.4, 0.5),
+    Parameters('Displasia','Data/Displasia.csv', 4, 6, 0.5),
     Parameters('Olivier','Data/OlivierFeatures.csv', 14, 0.4, 0.5),
     Parameters('Boone','Data/BooneFeatures.csv', 14, 0.4, 0.5),
     Parameters('Wine','Data/Wine.csv',3,0.4, 0.5),

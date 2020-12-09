@@ -33,6 +33,9 @@ class Model():
         
     def preProcessing_(self):
         self.data = (self.data - self.data.mean())/self.data.std() 
+    
+    def getValidation(self):
+        return (ls.getValidation(self.model.labels_, self.target, self.data))
         
 
 class KMeansModel(Model):
