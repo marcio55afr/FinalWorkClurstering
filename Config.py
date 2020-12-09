@@ -6,8 +6,7 @@ Created on Sun Dec  6 21:08:38 2020
 """
 
 # Seed to be used on every random execution
-def seed():
-    return 8348
+Seed = 8348
 
 class Parameters:
     

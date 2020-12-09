@@ -17,9 +17,9 @@ for df, param in list_df:
     kmeans.fit(param.k_clusters)
     kmeans.printInfo()
     
-    # meanShift = MeanShiftModel(df)
-    # meanShift.fit()
-    # meanShift.printInfo()
+    meanShift = MeanShiftModel(df)
+    meanShift.fit()
+    meanShift.printInfo()
     
     # dbscan = DBSCANModel(df)
     # dbscan.fit(param.eps)

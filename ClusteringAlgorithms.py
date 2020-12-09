@@ -46,7 +46,7 @@ class KMeansModel(Model):
         # n_clusters: the number of clusters or centroids generated
         # by Kmeans... Try use the number of target/label if exists.
         
-        model = KMeans(n_clusters, random_state=Config.seed()).fit(self.data)        
+        model = KMeans(n_clusters, random_state=Config.Seed).fit(self.data)        
         
         self.model = model
 
@@ -106,7 +106,7 @@ class SpectralClusteringModel(Model):
         
         model = SpectralClustering(n_clusters=k_clusters,
                                    assign_labels="discretize",
-                                   random_state=0).fit(self.data)
+                                   random_state=Config.Seed).fit(self.data)
         self.model = model
 
     def printInfo(self):
@@ -123,7 +123,8 @@ class AffinityPropagationModel(Model):
     # Runs the cluresting using the Mean shift algorithm 
     def fit(self, damping = 0.5):
         
-        model = AffinityPropagation(damping).fit(self.data)
+        model = AffinityPropagation(damping = damping,
+                                    random_state=Config.Seed).fit(self.data)
         self.model = model
 
     def printInfo(self):
