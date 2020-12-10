@@ -17,6 +17,7 @@ class Model():
         self.model = None
         self.target = data['target']
         self.data = data.drop(columns = 'target')
+        self.preProcessing_()
         
     
     def printInfo(self):

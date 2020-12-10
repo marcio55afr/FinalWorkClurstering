@@ -15,7 +15,7 @@ list_df = ReadData.getDatasets()
 
 def searchBestEps():
     datasetMetrics = {}
-    for df, param in ReadData.getDatasets()[:2]:
+    for df, param in ReadData.getDatasetsNormalized():
         print("searching eps for dataset: ", param.name)
         metrics = []
         for eps_i in np.arange(0.1,10,0.1):
@@ -26,10 +26,30 @@ def searchBestEps():
             metrics.append(dbscan.getValidation())
         datasetMetrics[param.name] = pd.DataFrame(metrics,columns = 
                                                   ['pureza','entropia','rand index',
-                                                   'silhueta','davies-bouldin'],
+                                                   'silhueta','davies-bouldin','n_groups'],
                                                   index = np.arange(0.1,10,0.1))
     return datasetMetrics
         
+def searchBestDumping():
+    datasetMetrics = {}
+    linfoma = ReadData.getDatasets()[:1]
+    for df, param in linfoma:
+        print("searching Dumping for dataset: ", param.name)
+        metrics = []
+        dumps = []
+        for dump in np.arange(0.5,1,0.01):
+            if(dump>=1): dump=0.99
+            if((dump % 0.1) == 0):
+                print(str(dump * 20),'%')
+            affinity = AffinityPropagationModel(df)
+            affinity.fit(dump)
+            metrics.append(affinity.getValidation())
+        datasetMetrics[param.name] = pd.DataFrame(metrics,columns = 
+                                                  ['pureza','entropia','rand index',
+                                                   'silhueta','davies-bouldin','n_groups'],
+                                                  index = np.arange(0.5,1,0.01))
+        
+    return datasetMetrics
 
 def main():
     for df, param in list_df:
@@ -55,4 +75,15 @@ def main():
         # affinity_propagation.printInfo()
         
 metrics = searchBestEps()
+
+for dados in metrics.values():
+    dados.plot()
 # main()
+
+
+
+
+
+
+
+

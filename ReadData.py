@@ -8,6 +8,7 @@ Created on Sun Dec  6 21:09:03 2020
 import pandas as pd
 import numpy as np
 import Config
+from DataProcessing import createNormalizedDatasets
 from sklearn.impute import SimpleImputer
 
 def getDatasets():
@@ -17,6 +18,10 @@ def getDatasets():
         list_df.append( (pd.read_csv(config_dataset.path), config_dataset) )
 
     return list_df
+
+def getDatasetsNormalized():
+    
+    return createNormalizedDatasets()
 
 
 def fillNullValues(data):
