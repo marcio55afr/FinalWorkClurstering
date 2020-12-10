@@ -30,40 +30,37 @@ def createNormalizedDatasets():
         print(data)
         #Scaling the samples to have unit norm
         normalization = ['l1', 'l2']
-        axis = [0,1]
-        for ax in axis:
-            for norm in normalization:
-                data_normalized = preprocessing.normalize(data,
-                                                          norm = norm,
-                                                          axis = ax,
-                                                          copy = True)
-                name = 'data_normalized_' + norm + 'axis' + str(ax)
-                data_normalized = pd.DataFrame(data_normalized, columns = data.columns)
-                parameters = Parameters(name, 
-                                        'Data/'+name+'.csv', 
-                                        param.k_clusters,
-                                        param.eps,
-                                        param.damping)
-                datasets.append( (data_normalized, parameters) )
+        for norm in normalization:
+            data_normalized = preprocessing.normalize(data,
+                                                      norm = norm,
+                                                      axis = 0,
+                                                      copy = True)
+            name = 'data_normalized_' + norm
+            data_normalized = pd.DataFrame(data_normalized, columns = data.columns)
+            parameters = Parameters(name, 
+                                    'Data/'+name+'.csv', 
+                                    param.k_clusters,
+                                    param.eps,
+                                    param.damping)
+            datasets.append( (data_normalized, parameters) )
         
         
         #Mapping data to a defined distribution by quantile transforms
         distribution = ['uniform','normal']
-        for ax in [0]:
-            for dist in distribution:
-                data_normalized = preprocessing.quantile_transform(data,
-                                                                   axis = ax,
-                                                                   output_distribution = dist,
-                                                                   random_state = Seed,
-                                                                   copy=True)
-                name = 'data_distribution_' + dist + 'axis' + str(ax)
-                data_normalized = pd.DataFrame(data_normalized, columns = data.columns)
-                parameters = Parameters(name, 
-                                        'Data/'+name+'.csv', 
-                                        param.k_clusters,
-                                        param.eps,
-                                        param.damping)
-                datasets.append( (data_normalized, parameters) )
+        for dist in distribution:
+            data_normalized = preprocessing.quantile_transform(data,
+                                                               axis = 0,
+                                                               output_distribution = dist,
+                                                               random_state = Seed,
+                                                               copy=True)
+            name = 'data_distribution_' + dist
+            data_normalized = pd.DataFrame(data_normalized, columns = data.columns)
+            parameters = Parameters(name, 
+                                    'Data/'+name+'.csv', 
+                                    param.k_clusters,
+                                    param.eps,
+                                    param.damping)
+            datasets.append( (data_normalized, parameters) )
         
         
         #Mapping data to a defined distribution by power transforms
@@ -73,7 +70,7 @@ def createNormalizedDatasets():
                                                             method = 'yeo-johnson',
                                                             standardize = stand,
                                                             copy=True)
-            name = 'data_distribution_' + dist + 'axis1.csv'
+            name = 'data_distribution_' + dist
             data_normalized = pd.DataFrame(data_normalized, columns = data.columns)
             parameters = Parameters(name, 
                                     'Data/'+name+'.csv', 
