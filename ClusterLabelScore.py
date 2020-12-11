@@ -57,6 +57,7 @@ def getValidation(labels, target, data):
     measures = np.full(6,-1.0)
     
     if (len(np.unique(labels)) <= 1):
+        measures[5] = 0
         return (measures)
     else:
         measures[0] = purity(labels, target)
@@ -64,7 +65,9 @@ def getValidation(labels, target, data):
         measures[2] = metrics.cluster.adjusted_rand_score(target, labels)
         measures[3] = metrics.silhouette_score(data, labels)
         measures[4] = metrics.davies_bouldin_score(data, labels)
-        measures[5] = len(np.unique(labels))
+        uniq_l = np.unique(labels)
+        uniq_l = np.delete(uniq_l, np.where(uniq_l == -1))
+        measures[5] = len(uniq_l)
         return (measures)
     
     

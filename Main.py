@@ -10,12 +10,14 @@ import numpy as np
 import pandas as pd
 from ClusteringAlgorithms import KMeansModel, MeanShiftModel, DBSCANModel,SpectralClusteringModel, AffinityPropagationModel
 from sklearn import preprocessing
+from sklearn.neighbors import NearestNeighbors
+from matplotlib import pyplot as plt
 
 list_df = ReadData.getDatasets()
 
 def searchBestEps():
     datasetMetrics = {}
-    for df, param in ReadData.getDatasetsNormalized():
+    for df, param in ReadData.getDatasets():
         print("searching eps for dataset: ", param.name)
         metrics = []
         for eps_i in np.arange(0.1,10,0.1):
@@ -28,6 +30,7 @@ def searchBestEps():
                                                   ['pureza','entropia','rand index',
                                                    'silhueta','davies-bouldin','n_groups'],
                                                   index = np.arange(0.1,10,0.1))
+        datasetMetrics[param.name].plot(y = 'n of clusters',title = param.name)
     return datasetMetrics
         
 def searchBestDumping():
