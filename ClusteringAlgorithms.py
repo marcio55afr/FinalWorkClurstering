@@ -119,10 +119,13 @@ class AffinityPropagationModel(Model):
         super().__init__(data)
     
     # Runs the cluresting using the Mean shift algorithm 
-    def fit(self, damping = 0.5):
-        
+    def fit(self, damping = 0.5, pref = -50, affinity_='euclidean', data_=None):
+        if(data_ is None):
+            data_ = self.data
         model = AffinityPropagation(damping = damping,
-                                    random_state=Config.Seed).fit(self.data)
+                                    preference = pref,
+                                    affinity = affinity_,
+                                    random_state=Config.Seed).fit(data_)
         self.model = model
 
     def printInfo(self):

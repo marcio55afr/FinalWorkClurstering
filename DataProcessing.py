@@ -26,7 +26,7 @@ def createNormalizedDatasets():
     
     list_data = ReadData.getDatasets()
     datasets = []
-    for data, param in list_data[:1]:
+    for data, param in list_data[1:2]:
         print(data)
         #Scaling the samples to have unit norm
         normalization = ['l1', 'l2']
@@ -62,7 +62,7 @@ def createNormalizedDatasets():
                                     param.damping)
             datasets.append( (data_normalized, parameters) )
         
-        
+        '''
         #Mapping data to a defined distribution by power transforms
         standardize = [True,False]
         for stand in standardize:
@@ -78,7 +78,7 @@ def createNormalizedDatasets():
                                     param.eps,
                                     param.damping)
             datasets.append( (data_normalized, parameters) )
-        
+        '''
     return datasets
         
 
