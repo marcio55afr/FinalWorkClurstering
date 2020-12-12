@@ -15,23 +15,21 @@ from matplotlib import pyplot as plt
 
 list_df = ReadData.getDatasets()
 
-def searchBestEps():
-    datasetMetrics = {}
+
+def searchEps():
     for df, param in ReadData.getDatasets():
-        print("searching eps for dataset: ", param.name)
-        metrics = []
-        for eps_i in np.arange(0.1,10,0.1):
-            if((eps_i % 1) == 0):
-                print(str(eps_i * 10),'%')
-            dbscan = DBSCANModel(df)
-            dbscan.fit(eps_i)
-            metrics.append(dbscan.getValidation())
-        datasetMetrics[param.name] = pd.DataFrame(metrics,columns = 
-                                                  ['pureza','entropia','rand index',
-                                                   'silhueta','davies-bouldin','n_groups'],
-                                                  index = np.arange(0.1,10,0.1))
-        datasetMetrics[param.name].plot(y = 'n of clusters',title = param.name)
-    return datasetMetrics
+        df = (df - df.mean())/df.std() 
+        neighbors = NearestNeighbors(n_neighbors=5)
+        neighbors_fit = neighbors.fit(df)
+        distances, indices = neighbors_fit.kneighbors(df)
+        distances = np.sort(distances, axis=0)
+        distances = distances[:,1]
+        plt.figure()
+        plt.xlabel('amostras')
+        plt.ylabel('k-ésimo vizinho')
+        plt.title(param.name)
+        plt.plot(distances)
+        plt.show()
         
 def searchBestDumping():
     datasetMetrics = {}
@@ -77,11 +75,10 @@ def main():
         # affinity_propagation.fit(param.damping)
         # affinity_propagation.printInfo()
         
-metrics = searchBestEps()
+# metrics = searchEps()
 
-for dados in metrics.values():
-    dados.plot()
-# main()
+
+main()
 
 
 

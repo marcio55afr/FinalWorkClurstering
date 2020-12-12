@@ -19,13 +19,12 @@ class Parameters:
         self.damping = damping
         
 datasets = [
-    Parameters('Wine','Data/Wine.csv',3,0.4, 0.5),
-    Parameters('Linfoma','Data/Linfoma.csv', 3, 6, 0.5),
-    Parameters('Displasia','Data/Displasia.csv', 4, 6, 0.5),
-    Parameters('Olivier','Data/OlivierFeatures.csv', 14, 0.4, 0.5),
-    #Parameters('Boone','Data/BooneFeatures.csv', 14, 0.4, 0.5),
-    Parameters('BreastCancer','Data/BreastCancerWisconsin.csv',2,0.4, 0.5),
-    Parameters('Linfoma','Data/Linfoma.csv', 3, 6, 0.5)
+    Parameters('Wine','Data/Wine.csv',3,2.9, 0.5),
+    Parameters('Linfoma','Data/Linfoma.csv', 3, 7, 0.5),
+    Parameters('Displasia','Data/Displasia.csv', 4, 7.5, 0.5),
+    #Parameters('Olivier','Data/OlivierFeatures.csv', 14, 0.4, 0.5),
+    Parameters('Boone','Data/BooneFeatures.csv', 14, 7, 0.5),
+    Parameters('BreastCancer','Data/BreastCancerWisconsin.csv',2,4, 0.5)
 ]
 
     
