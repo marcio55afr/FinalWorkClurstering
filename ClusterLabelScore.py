@@ -10,7 +10,7 @@ from sklearn import metrics
 import numpy as np
 
 def purity(labels, target):
-    pureza_total = 0
+    pureza_total = 0   
     numero_elementos = len(labels)
     for label_i in np.unique(labels):
         mask = [l == label_i for l in labels]
@@ -24,6 +24,7 @@ def purity(labels, target):
 
 def entropy(labels, target):
     total_entropy = 0
+
     numero_elementos = len(labels)
     for label_i in np.unique(labels):
         mask = [l == label_i for l in labels]
@@ -40,6 +41,10 @@ def entropy(labels, target):
 
 
 def printInfo(labels, target, data):
+    outlier_pos = [False if x == -1 else True for x in labels]
+    labels = np.array([x for x,y in zip(labels,outlier_pos) if y])
+    target = np.array([x for x,y in zip(target,outlier_pos) if y])
+    data = data[np.array(outlier_pos)]
     if (len(np.unique(labels)) <= 1):
         print("apenas 1 grupo encontrado. Não é possível avaliar o agrupamento")
     else:

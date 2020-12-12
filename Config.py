@@ -19,22 +19,19 @@ class Parameters:
         self.affinity = affinity
         
 datasets = [
-    Parameters('Wine','Data/Wine.csv',3,0.4, 
+    Parameters('Wine','Data/Wine.csv',3,2.9, 
                                     affinity = {'damping': 0.74,
                                                 'preference': -300}),
-    Parameters('Linfoma','Data/Linfoma.csv', 3, 6,  
+    Parameters('Linfoma','Data/Linfoma.csv', 3, 7,  
                                     affinity = {'damping': 0.74,
                                                 'preference': -3000}),
-    Parameters('Displasia','Data/Displasia.csv', 4, 6, 
+    Parameters('Displasia','Data/Displasia.csv', 4, 7.5, 
                                     affinity = {'damping': 0.86,
                                                 'preference': -3000}),
-    Parameters('BreastCancer','Data/BreastCancerWisconsin.csv',2,0.4,  
+    Parameters('BreastCancer','Data/BreastCancerWisconsin.csv',2,4,  
                                     affinity = {'damping': 0.88,
                                                 'preference': -1740}),
-    #Parameters('Olivier','Data/OlivierFeatures.csv', 14, 0.4,  
-    #                                affinity = {'damping': 0.82,
-    #                                            'preference': -3550}),
-    Parameters('Boone','Data/BooneFeatures.csv', 14, 0.4,  
+    Parameters('Boone','Data/BooneFeatures.csv', 14, 7,  
                                     affinity = {'damping': 0.74,
                                                 'preference': -3000})
 ]

@@ -16,23 +16,21 @@ import time
 
 list_df = ReadData.getDatasets()
 
-def searchBestEps():
-    datasetMetrics = {}
+
+def searchEps():
     for df, param in ReadData.getDatasets():
-        print("searching eps for dataset: ", param.name)
-        metrics = []
-        for eps_i in np.arange(0.1,10,0.1):
-            if((eps_i % 1) == 0):
-                print(str(eps_i * 10),'%')
-            dbscan = DBSCANModel(df)
-            dbscan.fit(eps_i)
-            metrics.append(dbscan.getValidation())
-        datasetMetrics[param.name] = pd.DataFrame(metrics,columns = 
-                                                  ['pureza','entropia','rand index',
-                                                   'silhueta','davies-bouldin','n_groups'],
-                                                  index = np.arange(0.1,10,0.1))
-        datasetMetrics[param.name].plot(y = 'n of clusters',title = param.name)
-    return datasetMetrics
+        df = (df - df.mean())/df.std() 
+        neighbors = NearestNeighbors(n_neighbors=5)
+        neighbors_fit = neighbors.fit(df)
+        distances, indices = neighbors_fit.kneighbors(df)
+        distances = np.sort(distances, axis=0)
+        distances = distances[:,1]
+        plt.figure()
+        plt.xlabel('amostras')
+        plt.ylabel('k-ésimo vizinho')
+        plt.title(param.name)
+        plt.plot(distances)
+        plt.show()
         
 def searchBestDumping():
     datasetMetrics = {}
@@ -99,12 +97,5 @@ def plotBestDumping():
         ax.legend(dados.columns.to_list()+['Damping Choosen'],fancybox=True,shadow=True)
         ax.set_xlim([0.49,1])
 
-def plot_retaDamping(dados, x,altura,name):
-    fig,ax = plt.subplots(figsize=[6,3], dpi=200)
-    ax.plot(dados)
-    ax.set_title('Searching damping in the '+name+' dataset')
-    ax.set_ylabel('Real number of each measure')
-    ax.set_xlabel('Damping')
-    ax.plot(2*[x], [0,altura], 'k')
-    ax.set_xlim([0.69,0.94])
 
+main()
