@@ -1,0 +1,58 @@
+
+        Dataset:  Wine
+Infomation about Affinity Propagation model
+
+purity:  0.9101123595505618
+entropy:  0.341926025489301
+silhueta:  0.26762205757857555
+Unique labels:
+ [0 1 2]
+Amount of each on:
+ [74 55 49]
+
+        Dataset:  Linfoma
+Infomation about Affinity Propagation model
+
+purity:  0.5486725663716814
+entropy:  1.2860031724618788
+silhueta:  0.21450080857573786
+Unique labels:
+ [0 1 2]
+Amount of each on:
+ [161  95  83]
+
+
+        Dataset:  Displasia
+Infomation about Affinity Propagation model
+
+purity:  0.4932432432432432
+entropy:  1.5881656358232699
+silhueta:  0.13760103897669412
+Unique labels:
+ [0 1 2]
+Amount of each on:
+ [104  77 115]
+
+
+        Dataset:  BreastCancer
+Infomation about Affinity Propagation model
+
+purity:  0.8963093145869947
+entropy:  0.4805167112255391
+silhueta:  0.34376269886227817
+Unique labels:
+ [0 1]
+Amount of each on:
+ [378 191]
+
+
+        Dataset:  Boone
+Infomation about Affinity Propagation model
+
+purity:  0.4296636085626912
+entropy:  2.379218302981225
+silhueta:  0.061293874293235434
+Unique labels:
+ [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13]
+Amount of each on:
+ [  70  748  426  695  103  239 1092   27  740  371 1245    9 1595  488]
